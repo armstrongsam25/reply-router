@@ -1,0 +1,55 @@
+{
+  "summary": "Published reply-router runx skill with green local harness (2/2 cases passed), opened PR #211 against runxhq/runx containing SKILL.md, X.yaml, and run.mjs. The skill classifies inbound replies (interested, objection, out_of_office, wrong_person, unsubscribe), appends suppression events with CAS for unsubscribes, and emits typed routing decisions for other classifications. Harness verified with runx-cli 0.6.15.",
+  "observations": [
+    {
+      "key": "runx_version",
+      "value": "runx-cli 0.6.15",
+      "detail": "Verified with npx runx --version"
+    },
+    {
+      "key": "package_name",
+      "value": "reply-router",
+      "detail": "Exact package name as required by bounty acceptance criteria"
+    },
+    {
+      "key": "harness_status",
+      "value": "passed",
+      "detail": "Both inline harness cases passed: sealed_unsubscribe_suppression (sealed) and stop_ambiguous_or_unsealed (failure)"
+    },
+    {
+      "key": "harness_cases",
+      "value": "sealed_unsubscribe_suppression, stop_ambiguous_or_unsealed",
+      "detail": "Case 1: unsubscribe reply triggers suppression event with CAS. Case 2: ambiguous reply stops with failure, no suppression, no routing."
+    },
+    {
+      "key": "pr_url",
+      "value": "https://github.com/runxhq/runx/pull/211",
+      "detail": "PR opened against runxhq/runx with skills/reply-router/X.yaml, SKILL.md, and run.mjs"
+    },
+    {
+      "key": "classification_types",
+      "value": "interested, objection, out_of_office, wrong_person, unsubscribe",
+      "detail": "Five classification types with signal-based matching and confidence scoring"
+    },
+    {
+      "key": "suppression_mechanism",
+      "value": "CAS append_event with idempotency_key and expected_version",
+      "detail": "Unsubscribe replies append a suppression event to a local event store with compare-and-swap version checking"
+    },
+    {
+      "key": "routing_mechanism",
+      "value": "runx.reply.routing.v1 with bounded send_target",
+      "detail": "Non-unsubscribe replies emit a typed routing decision naming a bounded send target for a separate governed send-as run"
+    },
+    {
+      "key": "typed_inputs",
+      "value": "inbound_reply{content,received_from,received_at}, original_send_receipt{send_plan,principal,receipt_id,checksum}, suppression_policy{unsubscribe_signals,confidence_threshold}",
+      "detail": "All typed inputs as specified in the bounty acceptance criteria"
+    },
+    {
+      "key": "typed_output",
+      "value": "classification{type,confidence,evidence}, suppression_result{aggregate_id,idempotency_key,before_version,after_version}, runx.reply.routing.v1{classification,send_target,principal}",
+      "detail": "All typed outputs as specified in the bounty acceptance criteria"
+    }
+  ]
+}
