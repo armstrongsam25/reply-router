@@ -1,7 +1,11 @@
 ---
 name: reply-router
 description: Classify an inbound reply message and either append a suppression event for unsubscribes or emit a bounded routing decision for all other classifications. Never sends — just routes.
-source: https://github.com/armstrongsam25/runx-demo
+source:
+  type: cli-tool
+  command: node
+  args:
+    - run.mjs
 runx:
   category: ops
   input_resolution:

@@ -1,0 +1,31 @@
+{
+  "schema": "runx.verify_verdict.v1",
+  "receipt_id": "sha256:a7b71bfa81a3ed564889c7956801f658619e07f890cb8d9b6a2ad0a7b5162aa3",
+  "valid": false,
+  "digest": {
+    "status": "valid",
+    "expected": "sha256:51c02b10aaca2ab0e38ae795d79092301b0b1ab2b41267ff0c2a25a615080714",
+    "actual": "sha256:51c02b10aaca2ab0e38ae795d79092301b0b1ab2b41267ff0c2a25a615080714"
+  },
+  "content_address": {
+    "status": "valid",
+    "expected": "sha256:a7b71bfa81a3ed564889c7956801f658619e07f890cb8d9b6a2ad0a7b5162aa3",
+    "actual": "sha256:a7b71bfa81a3ed564889c7956801f658619e07f890cb8d9b6a2ad0a7b5162aa3"
+  },
+  "signature": {
+    "mode": "production",
+    "status": "invalid",
+    "kid": "ci-authoring-smoke"
+  },
+  "lineage": {
+    "status": "unverified",
+    "message": "single receipt verification cannot prove receipt-tree lineage"
+  },
+  "findings": [
+    {
+      "code": "signature_key_missing",
+      "path": "issuer",
+      "message": "signature verifier could not resolve the issuer key"
+    }
+  ]
+}

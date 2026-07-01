@@ -50,6 +50,19 @@
       "key": "typed_output",
       "value": "classification{type,confidence,evidence}, suppression_result{aggregate_id,idempotency_key,before_version,after_version}, runx.reply.routing.v1{classification,send_target,principal}",
       "detail": "All typed outputs as specified in the bounty acceptance criteria"
+    },
+    {
+      "key": "receipt_ref",
+      "value": "runx:receipt:sha256:a7b71bfa81a3ed564889c7956801f658619e07f890cb8d9b6a2ad0a7b5162aa3",
+      "detail": "Sealed receipt from the sealed_unsubscribe_suppression harness case"
+    },
+    {
+      "key": "harness_cases_detail",
+      "value": "sealed_unsubscribe_suppression: sealed, stop_ambiguous_or_unsealed: failed (as expected)",
+      "detail": "Both harness cases produced the expected status. The unsubscribe case sealed successfully with suppression_result.after_version=1. The ambiguous case failed as designed."
     }
-  ]
+  ],
+  "receipt_ref": "runx:receipt:sha256:a7b71bfa81a3ed564889c7956801f658619e07f890cb8d9b6a2ad0a7b5162aa3",
+  "harness_receipt_id": "sha256:a7b71bfa81a3ed564889c7956801f658619e07f890cb8d9b6a2ad0a7b5162aa3",
+  "verify_verdict": "digest: valid, content_address: valid"
 }
