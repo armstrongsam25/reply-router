@@ -1,0 +1,648 @@
+{
+  "schema": "runx.graph_skill_state.v1",
+  "run_id": "run_route_92b8103f34d9",
+  "runner_name": "route",
+  "graph_inputs": {
+    "inbound_reply": {
+      "content": "Please unsubscribe me and stop sending these updates.",
+      "received_at": "2026-06-29T05:55:00Z",
+      "received_from": "recipient:ana@example.test"
+    },
+    "original_send_receipt": {
+      "checksum": "sha256:9c6c5cb5d9f3b932e7b70cdd3d93f5a87a3f6381a8ad69f512a3ad9817dd3a9f",
+      "principal": {
+        "ref": "account:growth-bot",
+        "type": "account"
+      },
+      "receipt_id": "runx:receipt:send_001",
+      "sealed": true,
+      "send_plan": {
+        "audience": {
+          "ref": "recipient:ana@example.test",
+          "type": "recipient"
+        },
+        "channel": "email",
+        "send_class": "outreach"
+      }
+    },
+    "store_projection": {
+      "aggregate_id": "recipient:ana@example.test",
+      "store_id": "runx.reply-router.suppression.v1",
+      "version": 7
+    },
+    "suppression_policy": {
+      "confidence_threshold": 0.9,
+      "unsubscribe_signals": [
+        "unsubscribe",
+        "stop sending",
+        "do not contact"
+      ]
+    }
+  },
+  "checkpoint": {
+    "graph_name": "reply-router",
+    "state": {
+      "graphId": "reply-router",
+      "status": "running",
+      "steps": [
+        {
+          "stepId": "classify",
+          "status": "succeeded",
+          "attempts": 1,
+          "startedAt": "2026-07-02T02:46:39.076Z",
+          "completedAt": "2026-07-02T02:46:39.076Z",
+          "receiptId": "sha256:904a9f9045f36c48e04ff714b8e146fbf4aa4a612977bd5f35bb7d17350047cb",
+          "outputs": {
+            "classification_packet": {
+              "data": {
+                "classification": {
+                  "confidence": 0.99,
+                  "evidence": [
+                    "matched signal: unsubscribe",
+                    "matched signal: stop sending"
+                  ],
+                  "type": "unsubscribe"
+                },
+                "reason": "unsubscribe intent matched policy signal(s)",
+                "route": "suppress"
+              }
+            },
+            "raw": "{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]},\"decision\":{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}},\"classification_packet\":{\"data\":{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}}}}",
+            "skill_claim": {
+              "classification": {
+                "confidence": 0.99,
+                "evidence": [
+                  "matched signal: unsubscribe",
+                  "matched signal: stop sending"
+                ],
+                "type": "unsubscribe"
+              },
+              "classification_packet": {
+                "data": {
+                  "classification": {
+                    "confidence": 0.99,
+                    "evidence": [
+                      "matched signal: unsubscribe",
+                      "matched signal: stop sending"
+                    ],
+                    "type": "unsubscribe"
+                  },
+                  "reason": "unsubscribe intent matched policy signal(s)",
+                  "route": "suppress"
+                }
+              },
+              "decision": {
+                "classification": {
+                  "confidence": 0.99,
+                  "evidence": [
+                    "matched signal: unsubscribe",
+                    "matched signal: stop sending"
+                  ],
+                  "type": "unsubscribe"
+                },
+                "reason": "unsubscribe intent matched policy signal(s)",
+                "route": "suppress"
+              },
+              "reason": "unsubscribe intent matched policy signal(s)",
+              "route": "suppress"
+            },
+            "status": "success",
+            "stderr": "",
+            "stdout": "{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]},\"decision\":{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}},\"classification_packet\":{\"data\":{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}}}}"
+          }
+        },
+        {
+          "stepId": "append_suppression",
+          "status": "succeeded",
+          "attempts": 1,
+          "startedAt": "2026-07-02T02:46:39.076Z",
+          "completedAt": "2026-07-02T02:46:39.076Z",
+          "receiptId": "sha256:6fe006e3f550993ddfddde726affa722b869086d7aa61db73e600d43b36652ad",
+          "outputs": {
+            "raw": "{\"suppression_result\":{\"aggregate_id\":\"recipient:ana@example.test\",\"idempotency_key\":\"reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b\",\"before_version\":7,\"after_version\":8},\"recipient_suppression_event\":{\"schema\":\"runx.reply.suppression_event.v1\",\"event_type\":\"recipient_unsubscribed\",\"aggregate_id\":\"recipient:ana@example.test\",\"received_at\":\"2026-06-29T05:55:00Z\",\"source_receipt_id\":\"runx:receipt:send_001\",\"classification\":{\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"],\"type\":\"unsubscribe\"},\"event\":{\"recipient_ref\":\"recipient:ana@example.test\",\"status\":\"suppressed\",\"reason\":\"unsubscribe reply\",\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}},\"data_store_call\":{\"registry_ref\":\"registry:runx/data-store@0.1.2\",\"operation\":\"append_event\",\"store_id\":\"runx.reply-router.suppression.v1\",\"aggregate_id\":\"recipient:ana@example.test\",\"expected_version\":7,\"idempotency_key\":\"reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b\"}}",
+            "skill_claim": {
+              "data_store_call": {
+                "aggregate_id": "recipient:ana@example.test",
+                "expected_version": 7,
+                "idempotency_key": "reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b",
+                "operation": "append_event",
+                "registry_ref": "registry:runx/data-store@0.1.2",
+                "store_id": "runx.reply-router.suppression.v1"
+              },
+              "recipient_suppression_event": {
+                "aggregate_id": "recipient:ana@example.test",
+                "classification": {
+                  "confidence": 0.99,
+                  "evidence": [
+                    "matched signal: unsubscribe",
+                    "matched signal: stop sending"
+                  ],
+                  "type": "unsubscribe"
+                },
+                "event": {
+                  "evidence": [
+                    "matched signal: unsubscribe",
+                    "matched signal: stop sending"
+                  ],
+                  "reason": "unsubscribe reply",
+                  "recipient_ref": "recipient:ana@example.test",
+                  "status": "suppressed"
+                },
+                "event_type": "recipient_unsubscribed",
+                "received_at": "2026-06-29T05:55:00Z",
+                "schema": "runx.reply.suppression_event.v1",
+                "source_receipt_id": "runx:receipt:send_001"
+              },
+              "suppression_result": {
+                "after_version": 8,
+                "aggregate_id": "recipient:ana@example.test",
+                "before_version": 7,
+                "idempotency_key": "reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b"
+              }
+            },
+            "status": "success",
+            "stderr": "",
+            "stdout": "{\"suppression_result\":{\"aggregate_id\":\"recipient:ana@example.test\",\"idempotency_key\":\"reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b\",\"before_version\":7,\"after_version\":8},\"recipient_suppression_event\":{\"schema\":\"runx.reply.suppression_event.v1\",\"event_type\":\"recipient_unsubscribed\",\"aggregate_id\":\"recipient:ana@example.test\",\"received_at\":\"2026-06-29T05:55:00Z\",\"source_receipt_id\":\"runx:receipt:send_001\",\"classification\":{\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"],\"type\":\"unsubscribe\"},\"event\":{\"recipient_ref\":\"recipient:ana@example.test\",\"status\":\"suppressed\",\"reason\":\"unsubscribe reply\",\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}},\"data_store_call\":{\"registry_ref\":\"registry:runx/data-store@0.1.2\",\"operation\":\"append_event\",\"store_id\":\"runx.reply-router.suppression.v1\",\"aggregate_id\":\"recipient:ana@example.test\",\"expected_version\":7,\"idempotency_key\":\"reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b\"}}"
+          }
+        },
+        {
+          "stepId": "emit_routing",
+          "status": "skipped",
+          "attempts": 0,
+          "completedAt": "2026-07-02T02:46:39.076Z"
+        },
+        {
+          "stepId": "human_lane",
+          "status": "skipped",
+          "attempts": 0,
+          "completedAt": "2026-07-02T02:46:39.076Z"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "step_id": "classify",
+        "attempt": 1,
+        "skill": "classify",
+        "runner": null,
+        "fanout_group": null,
+        "output": {
+          "status": "Success",
+          "stdout": "{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]},\"decision\":{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}},\"classification_packet\":{\"data\":{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}}}}",
+          "stderr": "",
+          "exit_code": 0,
+          "duration_ms": 109,
+          "metadata": {}
+        },
+        "outputs": {
+          "classification_packet": {
+            "data": {
+              "classification": {
+                "confidence": 0.99,
+                "evidence": [
+                  "matched signal: unsubscribe",
+                  "matched signal: stop sending"
+                ],
+                "type": "unsubscribe"
+              },
+              "reason": "unsubscribe intent matched policy signal(s)",
+              "route": "suppress"
+            }
+          },
+          "raw": "{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]},\"decision\":{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}},\"classification_packet\":{\"data\":{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}}}}",
+          "skill_claim": {
+            "classification": {
+              "confidence": 0.99,
+              "evidence": [
+                "matched signal: unsubscribe",
+                "matched signal: stop sending"
+              ],
+              "type": "unsubscribe"
+            },
+            "classification_packet": {
+              "data": {
+                "classification": {
+                  "confidence": 0.99,
+                  "evidence": [
+                    "matched signal: unsubscribe",
+                    "matched signal: stop sending"
+                  ],
+                  "type": "unsubscribe"
+                },
+                "reason": "unsubscribe intent matched policy signal(s)",
+                "route": "suppress"
+              }
+            },
+            "decision": {
+              "classification": {
+                "confidence": 0.99,
+                "evidence": [
+                  "matched signal: unsubscribe",
+                  "matched signal: stop sending"
+                ],
+                "type": "unsubscribe"
+              },
+              "reason": "unsubscribe intent matched policy signal(s)",
+              "route": "suppress"
+            },
+            "reason": "unsubscribe intent matched policy signal(s)",
+            "route": "suppress"
+          },
+          "status": "success",
+          "stderr": "",
+          "stdout": "{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]},\"decision\":{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}},\"classification_packet\":{\"data\":{\"route\":\"suppress\",\"reason\":\"unsubscribe intent matched policy signal(s)\",\"classification\":{\"type\":\"unsubscribe\",\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}}}}"
+        },
+        "receipt": {
+          "schema": "runx.receipt.v1",
+          "id": "sha256:904a9f9045f36c48e04ff714b8e146fbf4aa4a612977bd5f35bb7d17350047cb",
+          "created_at": "2026-07-02T02:46:39.076Z",
+          "canonicalization": "runx.receipt.c14n.v1",
+          "issuer": {
+            "type": "hosted",
+            "kid": "runx-demo-key",
+            "public_key_sha256": "sha256:7d5529d894e52cf01d0b10331898fe161f2e80c3cd897c465a02bdf01e4324a1"
+          },
+          "signature": {
+            "alg": "Ed25519",
+            "value": "base64:4Ig8nWvcNoJUILC3mBAXxP5QizpEwB5ymeHr8nL05RQebILH-wAhxDH00x2X7elZYo2qOCpA9fa0lTYPnMhSAg"
+          },
+          "digest": "sha256:00ac101adcd3dfea275070cab7935a8592a047095a67f9e2b0eb6d28efcf0359",
+          "idempotency": {
+            "intent_key": "sha256:reply-router-classify-intent",
+            "trigger_fingerprint": "sha256:reply-router-classify-trigger",
+            "content_hash": "sha256:reply-router-classify-content"
+          },
+          "subject": {
+            "kind": "skill",
+            "ref": {
+              "type": "harness",
+              "uri": "hrn_reply-router_classify"
+            },
+            "commitments": []
+          },
+          "authority": {
+            "actor_ref": {
+              "type": "principal",
+              "uri": "runx:principal:local_runtime"
+            },
+            "grant_refs": [],
+            "scope_refs": [],
+            "authority_proof_refs": [],
+            "attenuation": {
+              "parent_authority_ref": null,
+              "subset_proof": null
+            },
+            "terms": [],
+            "enforcement": {
+              "profile_hash": "sha256:635fdb0a7eef93911e3c6bd0b25b5e635edba32e0259133042b3a5f1fb19394e",
+              "redaction_refs": [],
+              "setup_refs": [],
+              "teardown_refs": []
+            }
+          },
+          "signals": [],
+          "decisions": [
+            {
+              "decision_id": "dec_classify",
+              "choice": "open",
+              "inputs": {
+                "signal_refs": [],
+                "target_ref": null,
+                "opportunity_refs": [],
+                "selection_ref": null
+              },
+              "proposed_intent": {
+                "purpose": "Open runtime node classify",
+                "legitimacy": "Local graph execution requested this node",
+                "success_criteria": [],
+                "constraints": [],
+                "derived_from": []
+              },
+              "selected_act_id": "act_classify",
+              "selected_harness_ref": null,
+              "justification": {
+                "summary": "runtime graph planner selected this node",
+                "evidence_refs": []
+              },
+              "closure": null,
+              "artifact_refs": []
+            }
+          ],
+          "acts": [
+            {
+              "id": "act_classify",
+              "form": "observation",
+              "intent": {
+                "purpose": "Run graph step classify",
+                "legitimacy": "Runtime graph execution was admitted by the local harness",
+                "success_criteria": [
+                  {
+                    "criterion_id": "process_exit",
+                    "statement": "cli-tool exits successfully",
+                    "required": true
+                  }
+                ],
+                "constraints": [],
+                "derived_from": []
+              },
+              "summary": "Executed graph step classify",
+              "criterion_bindings": [
+                {
+                  "criterion_id": "process_exit",
+                  "status": "verified",
+                  "evidence_refs": [],
+                  "verification_refs": [],
+                  "summary": "cli-tool exited successfully"
+                }
+              ],
+              "source_refs": [],
+              "target_refs": [],
+              "artifact_refs": [],
+              "closure": {
+                "disposition": "closed",
+                "reason_code": "process_exit",
+                "summary": "cli-tool exited successfully",
+                "closed_at": "2026-07-02T02:46:39.076Z"
+              }
+            }
+          ],
+          "seal": {
+            "disposition": "closed",
+            "reason_code": "process_closed",
+            "summary": "step classify completed",
+            "closed_at": "2026-07-02T02:46:39.076Z",
+            "last_observed_at": "2026-07-02T02:46:39.076Z",
+            "criteria": [
+              {
+                "criterion_id": "process_exit",
+                "status": "verified",
+                "evidence_refs": [],
+                "verification_refs": [],
+                "summary": "cli-tool exited successfully"
+              }
+            ]
+          },
+          "lineage": {
+            "children": [],
+            "sync": []
+          }
+        },
+        "admission_witness": {
+          "stepId": "classify",
+          "receiptId": "sha256:904a9f9045f36c48e04ff714b8e146fbf4aa4a612977bd5f35bb7d17350047cb"
+        }
+      },
+      {
+        "step_id": "append_suppression",
+        "attempt": 1,
+        "skill": "append_suppression",
+        "runner": null,
+        "fanout_group": null,
+        "output": {
+          "status": "Success",
+          "stdout": "{\"suppression_result\":{\"aggregate_id\":\"recipient:ana@example.test\",\"idempotency_key\":\"reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b\",\"before_version\":7,\"after_version\":8},\"recipient_suppression_event\":{\"schema\":\"runx.reply.suppression_event.v1\",\"event_type\":\"recipient_unsubscribed\",\"aggregate_id\":\"recipient:ana@example.test\",\"received_at\":\"2026-06-29T05:55:00Z\",\"source_receipt_id\":\"runx:receipt:send_001\",\"classification\":{\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"],\"type\":\"unsubscribe\"},\"event\":{\"recipient_ref\":\"recipient:ana@example.test\",\"status\":\"suppressed\",\"reason\":\"unsubscribe reply\",\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}},\"data_store_call\":{\"registry_ref\":\"registry:runx/data-store@0.1.2\",\"operation\":\"append_event\",\"store_id\":\"runx.reply-router.suppression.v1\",\"aggregate_id\":\"recipient:ana@example.test\",\"expected_version\":7,\"idempotency_key\":\"reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b\"}}",
+          "stderr": "",
+          "exit_code": 0,
+          "duration_ms": 118,
+          "metadata": {}
+        },
+        "outputs": {
+          "raw": "{\"suppression_result\":{\"aggregate_id\":\"recipient:ana@example.test\",\"idempotency_key\":\"reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b\",\"before_version\":7,\"after_version\":8},\"recipient_suppression_event\":{\"schema\":\"runx.reply.suppression_event.v1\",\"event_type\":\"recipient_unsubscribed\",\"aggregate_id\":\"recipient:ana@example.test\",\"received_at\":\"2026-06-29T05:55:00Z\",\"source_receipt_id\":\"runx:receipt:send_001\",\"classification\":{\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"],\"type\":\"unsubscribe\"},\"event\":{\"recipient_ref\":\"recipient:ana@example.test\",\"status\":\"suppressed\",\"reason\":\"unsubscribe reply\",\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}},\"data_store_call\":{\"registry_ref\":\"registry:runx/data-store@0.1.2\",\"operation\":\"append_event\",\"store_id\":\"runx.reply-router.suppression.v1\",\"aggregate_id\":\"recipient:ana@example.test\",\"expected_version\":7,\"idempotency_key\":\"reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b\"}}",
+          "skill_claim": {
+            "data_store_call": {
+              "aggregate_id": "recipient:ana@example.test",
+              "expected_version": 7,
+              "idempotency_key": "reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b",
+              "operation": "append_event",
+              "registry_ref": "registry:runx/data-store@0.1.2",
+              "store_id": "runx.reply-router.suppression.v1"
+            },
+            "recipient_suppression_event": {
+              "aggregate_id": "recipient:ana@example.test",
+              "classification": {
+                "confidence": 0.99,
+                "evidence": [
+                  "matched signal: unsubscribe",
+                  "matched signal: stop sending"
+                ],
+                "type": "unsubscribe"
+              },
+              "event": {
+                "evidence": [
+                  "matched signal: unsubscribe",
+                  "matched signal: stop sending"
+                ],
+                "reason": "unsubscribe reply",
+                "recipient_ref": "recipient:ana@example.test",
+                "status": "suppressed"
+              },
+              "event_type": "recipient_unsubscribed",
+              "received_at": "2026-06-29T05:55:00Z",
+              "schema": "runx.reply.suppression_event.v1",
+              "source_receipt_id": "runx:receipt:send_001"
+            },
+            "suppression_result": {
+              "after_version": 8,
+              "aggregate_id": "recipient:ana@example.test",
+              "before_version": 7,
+              "idempotency_key": "reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b"
+            }
+          },
+          "status": "success",
+          "stderr": "",
+          "stdout": "{\"suppression_result\":{\"aggregate_id\":\"recipient:ana@example.test\",\"idempotency_key\":\"reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b\",\"before_version\":7,\"after_version\":8},\"recipient_suppression_event\":{\"schema\":\"runx.reply.suppression_event.v1\",\"event_type\":\"recipient_unsubscribed\",\"aggregate_id\":\"recipient:ana@example.test\",\"received_at\":\"2026-06-29T05:55:00Z\",\"source_receipt_id\":\"runx:receipt:send_001\",\"classification\":{\"confidence\":0.99,\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"],\"type\":\"unsubscribe\"},\"event\":{\"recipient_ref\":\"recipient:ana@example.test\",\"status\":\"suppressed\",\"reason\":\"unsubscribe reply\",\"evidence\":[\"matched signal: unsubscribe\",\"matched signal: stop sending\"]}},\"data_store_call\":{\"registry_ref\":\"registry:runx/data-store@0.1.2\",\"operation\":\"append_event\",\"store_id\":\"runx.reply-router.suppression.v1\",\"aggregate_id\":\"recipient:ana@example.test\",\"expected_version\":7,\"idempotency_key\":\"reply-router:101281026350893ff804b1f687257cba024e5961614d41442807f65f77d18d8b\"}}"
+        },
+        "receipt": {
+          "schema": "runx.receipt.v1",
+          "id": "sha256:6fe006e3f550993ddfddde726affa722b869086d7aa61db73e600d43b36652ad",
+          "created_at": "2026-07-02T02:46:39.076Z",
+          "canonicalization": "runx.receipt.c14n.v1",
+          "issuer": {
+            "type": "hosted",
+            "kid": "runx-demo-key",
+            "public_key_sha256": "sha256:7d5529d894e52cf01d0b10331898fe161f2e80c3cd897c465a02bdf01e4324a1"
+          },
+          "signature": {
+            "alg": "Ed25519",
+            "value": "base64:3YqDVCD4kxqobPfgzS7Hjq9fXWcic3phe_oOrQUYRZKqOs5W-vXbqVBOw0hVZ8Wa2j2UuDrCUdSJOtbBws86Bg"
+          },
+          "digest": "sha256:dd1d2cfb2c22413c638a34aee34b8a7873f3636439f97d82272bbc4f9f4c5b00",
+          "idempotency": {
+            "intent_key": "sha256:reply-router-append_suppression-intent",
+            "trigger_fingerprint": "sha256:reply-router-append_suppression-trigger",
+            "content_hash": "sha256:reply-router-append_suppression-content"
+          },
+          "subject": {
+            "kind": "skill",
+            "ref": {
+              "type": "harness",
+              "uri": "hrn_reply-router_append_suppression"
+            },
+            "commitments": []
+          },
+          "authority": {
+            "actor_ref": {
+              "type": "principal",
+              "uri": "runx:principal:local_runtime"
+            },
+            "grant_refs": [],
+            "scope_refs": [],
+            "authority_proof_refs": [],
+            "attenuation": {
+              "parent_authority_ref": null,
+              "subset_proof": null
+            },
+            "terms": [],
+            "enforcement": {
+              "profile_hash": "sha256:635fdb0a7eef93911e3c6bd0b25b5e635edba32e0259133042b3a5f1fb19394e",
+              "redaction_refs": [],
+              "setup_refs": [],
+              "teardown_refs": []
+            }
+          },
+          "signals": [],
+          "decisions": [
+            {
+              "decision_id": "dec_append_suppression",
+              "choice": "open",
+              "inputs": {
+                "signal_refs": [],
+                "target_ref": null,
+                "opportunity_refs": [],
+                "selection_ref": null
+              },
+              "proposed_intent": {
+                "purpose": "Open runtime node append_suppression",
+                "legitimacy": "Local graph execution requested this node",
+                "success_criteria": [],
+                "constraints": [],
+                "derived_from": []
+              },
+              "selected_act_id": "act_append_suppression",
+              "selected_harness_ref": null,
+              "justification": {
+                "summary": "runtime graph planner selected this node",
+                "evidence_refs": []
+              },
+              "closure": null,
+              "artifact_refs": []
+            }
+          ],
+          "acts": [
+            {
+              "id": "act_append_suppression",
+              "form": "observation",
+              "intent": {
+                "purpose": "Run graph step append_suppression",
+                "legitimacy": "Runtime graph execution was admitted by the local harness",
+                "success_criteria": [
+                  {
+                    "criterion_id": "process_exit",
+                    "statement": "cli-tool exits successfully",
+                    "required": true
+                  }
+                ],
+                "constraints": [],
+                "derived_from": []
+              },
+              "summary": "Executed graph step append_suppression",
+              "criterion_bindings": [
+                {
+                  "criterion_id": "process_exit",
+                  "status": "verified",
+                  "evidence_refs": [],
+                  "verification_refs": [],
+                  "summary": "cli-tool exited successfully"
+                }
+              ],
+              "source_refs": [],
+              "target_refs": [],
+              "artifact_refs": [],
+              "closure": {
+                "disposition": "closed",
+                "reason_code": "process_exit",
+                "summary": "cli-tool exited successfully",
+                "closed_at": "2026-07-02T02:46:39.076Z"
+              }
+            }
+          ],
+          "seal": {
+            "disposition": "closed",
+            "reason_code": "process_closed",
+            "summary": "step append_suppression completed",
+            "closed_at": "2026-07-02T02:46:39.076Z",
+            "last_observed_at": "2026-07-02T02:46:39.076Z",
+            "criteria": [
+              {
+                "criterion_id": "process_exit",
+                "status": "verified",
+                "evidence_refs": [],
+                "verification_refs": [],
+                "summary": "cli-tool exited successfully"
+              }
+            ]
+          },
+          "lineage": {
+            "children": [],
+            "sync": []
+          }
+        },
+        "admission_witness": {
+          "stepId": "append_suppression",
+          "receiptId": "sha256:6fe006e3f550993ddfddde726affa722b869086d7aa61db73e600d43b36652ad"
+        }
+      }
+    ],
+    "sync_points": [],
+    "journal": {
+      "entries": [
+        {
+          "event": {
+            "type": "step_started",
+            "message": "step classify started",
+            "data": {
+              "act_id": "act_classify",
+              "kind": "act_started",
+              "step_id": "classify"
+            }
+          }
+        },
+        {
+          "event": {
+            "type": "step_completed",
+            "message": "step classify completed",
+            "data": {
+              "act_id": "act_classify",
+              "disposition": "closed",
+              "kind": "act_closed",
+              "step_id": "classify"
+            }
+          }
+        },
+        {
+          "event": {
+            "type": "step_started",
+            "message": "step append_suppression started",
+            "data": {
+              "act_id": "act_append_suppression",
+              "kind": "act_started",
+              "step_id": "append_suppression"
+            }
+          }
+        },
+        {
+          "event": {
+            "type": "step_completed",
+            "message": "step append_suppression completed",
+            "data": {
+              "act_id": "act_append_suppression",
+              "disposition": "closed",
+              "kind": "act_closed",
+              "step_id": "append_suppression"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

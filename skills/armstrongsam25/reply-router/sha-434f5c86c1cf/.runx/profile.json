@@ -1,0 +1,28 @@
+{
+  "origin": {
+    "digest": "sha256:49fc19fcdd03f9daf6cdfd1f410e85b619965ef23e1607f20411ac587f8db595",
+    "profile_digest": "sha256:db1b15120077563ef964a8684072695deb08fa88ecf3f59bd5cfd579d586e2b7",
+    "ref": "armstrongsam25/reply-router",
+    "runner_names": [
+      "default"
+    ],
+    "skill_id": "armstrongsam25/reply-router",
+    "source": "runx-registry",
+    "source_label": "runx registry",
+    "trust_tier": "community",
+    "version": "sha-434f5c86c1cf"
+  },
+  "profile": {
+    "digest": "sha256:db1b15120077563ef964a8684072695deb08fa88ecf3f59bd5cfd579d586e2b7",
+    "document": "skill: reply-router\nversion: \"0.1.0\"\n\ncatalog:\n  kind: skill\n  audience: public\n  visibility: public\n  role: canonical\n\nharness:\n  cases:\n    - name: sealed_unsubscribe_suppression\n      runner: default\n      inputs:\n        inbound_reply:\n          content: \"Please unsubscribe me from this mailing list. I don't want these emails anymore.\"\n          received_from: \"mailto:alice@example.com\"\n          received_at: \"2026-07-01T10:00:00Z\"\n        original_send_receipt:\n          send_plan: \"newsletter-weekly-2026-w26\"\n          principal: \"principal:marketing\"\n          receipt_id: \"rcpt_01JXNEWSLETTER001\"\n          checksum: \"sha256:abc123def456\"\n        suppression_policy:\n          unsubscribe_signals:\n            - \"unsubscribe\"\n            - \"stop sending\"\n            - \"remove me\"\n            - \"opt out\"\n            - \"don't want\"\n          confidence_threshold: 0.75\n      expect:\n        status: sealed\n        receipt:\n          schema: runx.receipt.v1\n          state: sealed\n          disposition: closed\n          reason_code: process_closed\n\n    - name: stop_ambiguous_or_unsealed\n      runner: default\n      inputs:\n        inbound_reply:\n          content: \"Hmm, let me think about it and circle back.\"\n          received_from: \"mailto:bob@example.com\"\n          received_at: \"2026-07-01T11:00:00Z\"\n        original_send_receipt:\n          send_plan: \"newsletter-weekly-2026-w26\"\n          principal: \"principal:marketing\"\n          receipt_id: \"rcpt_01JXNEWSLETTER002\"\n          checksum: \"sha256:def789ghi012\"\n        suppression_policy:\n          unsubscribe_signals:\n            - \"unsubscribe\"\n            - \"stop sending\"\n            - \"remove me\"\n            - \"opt out\"\n            - \"don't want\"\n          confidence_threshold: 0.75\n      expect:\n        status: failure\n        receipt:\n          schema: runx.receipt.v1\n          state: sealed\n          disposition: closed\n          reason_code: process_failed\n\nrunners:\n  default:\n    default: true\n    type: cli-tool\n    command: node\n    args:\n      - run.mjs\n    outputs:\n      classification: object\n      suppression_result: object\n      routing: object\n    inputs:\n      inbound_reply:\n        type: json\n        required: true\n        description: Inbound reply message with content, sender, and timestamp.\n      original_send_receipt:\n        type: json\n        required: true\n        description: Receipt for the original outbound send that prompted this reply.\n      suppression_policy:\n        type: json\n        required: false\n        description: Policy defining unsubscribe signals and confidence threshold.\n",
+    "runner_names": [
+      "default"
+    ]
+  },
+  "schema_version": "runx.skill-profile.v1",
+  "skill": {
+    "digest": "sha256:49fc19fcdd03f9daf6cdfd1f410e85b619965ef23e1607f20411ac587f8db595",
+    "name": "reply-router",
+    "path": "SKILL.md"
+  }
+}

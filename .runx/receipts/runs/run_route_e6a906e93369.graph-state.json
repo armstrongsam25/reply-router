@@ -1,0 +1,352 @@
+{
+  "schema": "runx.graph_skill_state.v1",
+  "run_id": "run_route_e6a906e93369",
+  "runner_name": "route",
+  "graph_inputs": {
+    "inbound_reply": {
+      "content": "Please unsubscribe me from this mailing list. I do not want these emails anymore.",
+      "received_at": "2026-07-01T10:00:00Z",
+      "received_from": "mailto:alice@example.com"
+    },
+    "original_send_receipt": {
+      "checksum": "sha256:abc123def456",
+      "principal": "principal:marketing",
+      "receipt_id": "rcpt_01JXNEWSLETTER001",
+      "send_plan": "newsletter-weekly-2026-w26"
+    },
+    "suppression_policy": {
+      "confidence_threshold": 0.75,
+      "unsubscribe_signals": [
+        "unsubscribe",
+        "stop sending",
+        "remove me",
+        "opt out",
+        "don't want"
+      ]
+    }
+  },
+  "checkpoint": {
+    "graph_name": "reply-router",
+    "state": {
+      "graphId": "reply-router",
+      "status": "running",
+      "steps": [
+        {
+          "stepId": "classify",
+          "status": "succeeded",
+          "attempts": 1,
+          "startedAt": "2026-07-02T00:07:22.135Z",
+          "completedAt": "2026-07-02T00:07:22.135Z",
+          "receiptId": "sha256:6a05dc7b5e2a5bf0200b70237caffd0780c000e7f59959c842376b32eca44123",
+          "outputs": {
+            "classification_packet": {
+              "data": {
+                "classification": {
+                  "confidence": 1,
+                  "evidence": [
+                    "original_send_receipt must be sealed and carry a sha256 checksum"
+                  ],
+                  "type": "needs_agent"
+                },
+                "reason": "original_send_receipt is not sealed or is missing a sha256 checksum",
+                "route": "needs_agent"
+              }
+            },
+            "raw": "{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]},\"decision\":{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]}},\"classification_packet\":{\"data\":{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]}}}}",
+            "skill_claim": {
+              "classification": {
+                "confidence": 1,
+                "evidence": [
+                  "original_send_receipt must be sealed and carry a sha256 checksum"
+                ],
+                "type": "needs_agent"
+              },
+              "classification_packet": {
+                "data": {
+                  "classification": {
+                    "confidence": 1,
+                    "evidence": [
+                      "original_send_receipt must be sealed and carry a sha256 checksum"
+                    ],
+                    "type": "needs_agent"
+                  },
+                  "reason": "original_send_receipt is not sealed or is missing a sha256 checksum",
+                  "route": "needs_agent"
+                }
+              },
+              "decision": {
+                "classification": {
+                  "confidence": 1,
+                  "evidence": [
+                    "original_send_receipt must be sealed and carry a sha256 checksum"
+                  ],
+                  "type": "needs_agent"
+                },
+                "reason": "original_send_receipt is not sealed or is missing a sha256 checksum",
+                "route": "needs_agent"
+              },
+              "reason": "original_send_receipt is not sealed or is missing a sha256 checksum",
+              "route": "needs_agent"
+            },
+            "status": "success",
+            "stderr": "",
+            "stdout": "{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]},\"decision\":{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]}},\"classification_packet\":{\"data\":{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]}}}}"
+          }
+        },
+        {
+          "stepId": "append_suppression",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "stepId": "emit_routing",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "stepId": "human_lane",
+          "status": "pending",
+          "attempts": 0
+        }
+      ]
+    },
+    "steps": [
+      {
+        "step_id": "classify",
+        "attempt": 1,
+        "skill": "classify",
+        "runner": null,
+        "fanout_group": null,
+        "output": {
+          "status": "Success",
+          "stdout": "{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]},\"decision\":{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]}},\"classification_packet\":{\"data\":{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]}}}}",
+          "stderr": "",
+          "exit_code": 0,
+          "duration_ms": 132,
+          "metadata": {}
+        },
+        "outputs": {
+          "classification_packet": {
+            "data": {
+              "classification": {
+                "confidence": 1,
+                "evidence": [
+                  "original_send_receipt must be sealed and carry a sha256 checksum"
+                ],
+                "type": "needs_agent"
+              },
+              "reason": "original_send_receipt is not sealed or is missing a sha256 checksum",
+              "route": "needs_agent"
+            }
+          },
+          "raw": "{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]},\"decision\":{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]}},\"classification_packet\":{\"data\":{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]}}}}",
+          "skill_claim": {
+            "classification": {
+              "confidence": 1,
+              "evidence": [
+                "original_send_receipt must be sealed and carry a sha256 checksum"
+              ],
+              "type": "needs_agent"
+            },
+            "classification_packet": {
+              "data": {
+                "classification": {
+                  "confidence": 1,
+                  "evidence": [
+                    "original_send_receipt must be sealed and carry a sha256 checksum"
+                  ],
+                  "type": "needs_agent"
+                },
+                "reason": "original_send_receipt is not sealed or is missing a sha256 checksum",
+                "route": "needs_agent"
+              }
+            },
+            "decision": {
+              "classification": {
+                "confidence": 1,
+                "evidence": [
+                  "original_send_receipt must be sealed and carry a sha256 checksum"
+                ],
+                "type": "needs_agent"
+              },
+              "reason": "original_send_receipt is not sealed or is missing a sha256 checksum",
+              "route": "needs_agent"
+            },
+            "reason": "original_send_receipt is not sealed or is missing a sha256 checksum",
+            "route": "needs_agent"
+          },
+          "status": "success",
+          "stderr": "",
+          "stdout": "{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]},\"decision\":{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]}},\"classification_packet\":{\"data\":{\"route\":\"needs_agent\",\"reason\":\"original_send_receipt is not sealed or is missing a sha256 checksum\",\"classification\":{\"type\":\"needs_agent\",\"confidence\":1,\"evidence\":[\"original_send_receipt must be sealed and carry a sha256 checksum\"]}}}}"
+        },
+        "receipt": {
+          "schema": "runx.receipt.v1",
+          "id": "sha256:6a05dc7b5e2a5bf0200b70237caffd0780c000e7f59959c842376b32eca44123",
+          "created_at": "2026-07-02T00:07:22.135Z",
+          "canonicalization": "runx.receipt.c14n.v1",
+          "issuer": {
+            "type": "hosted",
+            "kid": "runx-demo-key",
+            "public_key_sha256": "sha256:7d5529d894e52cf01d0b10331898fe161f2e80c3cd897c465a02bdf01e4324a1"
+          },
+          "signature": {
+            "alg": "Ed25519",
+            "value": "base64:Nblb1-ODUDfftFbSawTIu1gwvZkHv8_fcNU3aSoeYFF7A4CdTq8fKAEX7V8kXzUNCeS2Ac_odLSr4dm-KrEfCw"
+          },
+          "digest": "sha256:f876c8cb617e12a60c41daa96f0efab998fd68a340d653c25b91d0268c8858fc",
+          "idempotency": {
+            "intent_key": "sha256:reply-router-classify-intent",
+            "trigger_fingerprint": "sha256:reply-router-classify-trigger",
+            "content_hash": "sha256:reply-router-classify-content"
+          },
+          "subject": {
+            "kind": "skill",
+            "ref": {
+              "type": "harness",
+              "uri": "hrn_reply-router_classify"
+            },
+            "commitments": []
+          },
+          "authority": {
+            "actor_ref": {
+              "type": "principal",
+              "uri": "runx:principal:local_runtime"
+            },
+            "grant_refs": [],
+            "scope_refs": [],
+            "authority_proof_refs": [],
+            "attenuation": {
+              "parent_authority_ref": null,
+              "subset_proof": null
+            },
+            "terms": [],
+            "enforcement": {
+              "profile_hash": "sha256:635fdb0a7eef93911e3c6bd0b25b5e635edba32e0259133042b3a5f1fb19394e",
+              "redaction_refs": [],
+              "setup_refs": [],
+              "teardown_refs": []
+            }
+          },
+          "signals": [],
+          "decisions": [
+            {
+              "decision_id": "dec_classify",
+              "choice": "open",
+              "inputs": {
+                "signal_refs": [],
+                "target_ref": null,
+                "opportunity_refs": [],
+                "selection_ref": null
+              },
+              "proposed_intent": {
+                "purpose": "Open runtime node classify",
+                "legitimacy": "Local graph execution requested this node",
+                "success_criteria": [],
+                "constraints": [],
+                "derived_from": []
+              },
+              "selected_act_id": "act_classify",
+              "selected_harness_ref": null,
+              "justification": {
+                "summary": "runtime graph planner selected this node",
+                "evidence_refs": []
+              },
+              "closure": null,
+              "artifact_refs": []
+            }
+          ],
+          "acts": [
+            {
+              "id": "act_classify",
+              "form": "observation",
+              "intent": {
+                "purpose": "Run graph step classify",
+                "legitimacy": "Runtime graph execution was admitted by the local harness",
+                "success_criteria": [
+                  {
+                    "criterion_id": "process_exit",
+                    "statement": "cli-tool exits successfully",
+                    "required": true
+                  }
+                ],
+                "constraints": [],
+                "derived_from": []
+              },
+              "summary": "Executed graph step classify",
+              "criterion_bindings": [
+                {
+                  "criterion_id": "process_exit",
+                  "status": "verified",
+                  "evidence_refs": [],
+                  "verification_refs": [],
+                  "summary": "cli-tool exited successfully"
+                }
+              ],
+              "source_refs": [],
+              "target_refs": [],
+              "artifact_refs": [],
+              "closure": {
+                "disposition": "closed",
+                "reason_code": "process_exit",
+                "summary": "cli-tool exited successfully",
+                "closed_at": "2026-07-02T00:07:22.135Z"
+              }
+            }
+          ],
+          "seal": {
+            "disposition": "closed",
+            "reason_code": "process_closed",
+            "summary": "step classify completed",
+            "closed_at": "2026-07-02T00:07:22.135Z",
+            "last_observed_at": "2026-07-02T00:07:22.135Z",
+            "criteria": [
+              {
+                "criterion_id": "process_exit",
+                "status": "verified",
+                "evidence_refs": [],
+                "verification_refs": [],
+                "summary": "cli-tool exited successfully"
+              }
+            ]
+          },
+          "lineage": {
+            "children": [],
+            "sync": []
+          }
+        },
+        "admission_witness": {
+          "stepId": "classify",
+          "receiptId": "sha256:6a05dc7b5e2a5bf0200b70237caffd0780c000e7f59959c842376b32eca44123"
+        }
+      }
+    ],
+    "sync_points": [],
+    "journal": {
+      "entries": [
+        {
+          "event": {
+            "type": "step_started",
+            "message": "step classify started",
+            "data": {
+              "act_id": "act_classify",
+              "kind": "act_started",
+              "step_id": "classify"
+            }
+          }
+        },
+        {
+          "event": {
+            "type": "step_completed",
+            "message": "step classify completed",
+            "data": {
+              "act_id": "act_classify",
+              "disposition": "closed",
+              "kind": "act_closed",
+              "step_id": "classify"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
